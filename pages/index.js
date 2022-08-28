@@ -14,6 +14,24 @@ export default function Home() {
 
   const [players, setPlayers] = useState([])
 
+  useEffect(() => {
+    return async () => {
+      const { players } = await hygraphClient.request(
+          gql`
+                query MyQuery {
+                  players {
+                    id
+                    fullName
+                    mobile
+                    playerType
+                    createdAt
+                  }
+                }
+            `,
+      )
+      setPlayers(players);
+    };
+  }, []);
 
   useEffect(() => {
     return async () => {
@@ -33,26 +51,6 @@ export default function Home() {
       setPlayers(players);
     };
   }, [players]);
-
-
-  useEffect(() => {
-    return async () => {
-      const { players } = await hygraphClient.request(
-          gql`
-                query MyQuery {
-                  players {
-                    id
-                    fullName
-                    mobile
-                    playerType
-                    createdAt
-                  }
-                }
-            `,
-      )
-      setPlayers(players);
-    };
-  }, []);
 
 
   const addNewPlayer = async (name, phoneNumber) => {
