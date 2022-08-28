@@ -1,6 +1,6 @@
 import React from 'react';
-import './Header.css';
 import logoUrl from '../../public/assets/logo.png';
+import Image from "next/image";
 const Header = () => (
     <header className='mt-2'>
         <nav
@@ -10,7 +10,7 @@ const Header = () => (
                 <div className="navbar-collapse collapse grow items-center" id="navbarSupportedContentY">
                     <ul className="navbar-nav mr-auto lg:flex lg:flex-row">
                         <li className={'mx-auto'}>
-                            <img src={logoUrl} alt={'KotowscyDent logo - Orlik JW'}/>
+                            <Image src={logoUrl} alt={'KotowscyDent logo - Orlik JW'}/>
                         </li>
                     </ul>
                 </div>

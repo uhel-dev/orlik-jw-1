@@ -1,39 +1,30 @@
 import React from 'react';
-import './PlayerList.css';
 import swal from 'sweetalert';
 
-export enum PlayerType {
-    kapitan,
-    zawodnik,
-    zawodnik_rezerwowy
-}
 
 export class Player {
-    name: string;
-    mobile: string;
-    playerType?: PlayerType;
-    timestamp?: Date;
+    fullName
+    mobile
+    playerType
+    timestamp
 
-    constructor(name: string, mobile: string, playerType: PlayerType = PlayerType.zawodnik) {
-        this.name = name;
+    constructor(name, mobile, playerType = "zawodnik", createdAt) {
+        this.fullName = name;
         this.mobile = mobile;
-        this.playerType = playerType
-        this.timestamp = new Date()
+        this.playerType = playerType;
+        this.timestamp = createdAt;
     }
 }
 
+function PlayerList({players, removePlayers}) {
 
-export interface PlayerListProps {
-    players: Player[],
-    removePlayers: (data: any) => void
-}
-
-function PlayerList({players, removePlayers}: PlayerListProps) {
-
-
-    const getFormattedMobileNumber = (n: string) => {
-        // @ts-ignore
-        return (n.includes('+48') ? '' : '+48 ') + n.match(/.{1,3}/g).join(' ')
+    const getFormattedMobileNumber = (n) => {
+        if(n) {
+            const number = n.toString()
+            if (number) {
+                return (number.includes('+48') ? '' : '+48 ') + number.match(/.{1,3}/g).join(' ')
+            }
+        }
     }
 
     // @ts-ignore
@@ -91,20 +82,21 @@ function PlayerList({players, removePlayers}: PlayerListProps) {
 
                                 {
                                     players.map((player, i) => {
+
                                         return (
-                                            <tr key={player.name} className={player.playerType === PlayerType.kapitan ? `bg-blue-100` : (player.playerType === PlayerType.zawodnik ? "bg-white" : "bg-red-100")}>
+                                            <tr key={player.fullName} className={player.playerType === 0 ? `bg-blue-100` : (player.playerType === 1 ? "bg-white" : "bg-red-100")}>
                                                 <td className="text-xs md:text-lg px-3 md:px-6 py-4 whitespace-nowrap font-medium text-gray-900">{i + 1}</td>
                                                 <td className="text-xs md:text-lg px-3 md:px-6 text-gray-900 font-light py-4 whitespace-nowrap">
-                                                    {player.name}
+                                                    {player.fullName}
                                                 </td>
                                                 <td className="text-xs md:text-lg px-3 md:px-6 text-gray-900 font-light py-4 whitespace-nowrap">
                                                     <a href={`tel:+48${player.mobile}`} className="no-underline text-gray-900">{getFormattedMobileNumber(player.mobile)}</a>
                                                 </td>
                                                 <td className="text-xs md:text-lg px-3 md:px-6 text-gray-900 font-light py-4 whitespace-nowrap">
-                                                    {player.playerType === PlayerType.kapitan ? "Kapitan" : (player.playerType === PlayerType.zawodnik ? "Zawodnik" : "Rezerwowy") }
+                                                    {player.playerType === 0 ? "Kapitan" : (player.playerType === 1 ? "Zawodnik" : "Rezerwowy") }
                                                 </td>
                                                     <td className="text-xs md:text-lg px-3 md:px-6 text-gray-900 font-light py-4 whitespace-nowrap">
-                                                    { player.playerType !== PlayerType.kapitan && (
+                                                    { player.playerType !== 0 && (
                                                         <>
                                                             <button data-tooltip-target="tooltip-default" type="button" onClick={() => {handleRemove(player)}}
                                                                     className="p-2 inline-block rounded-full bg-[#32d7d3] text-white leading-normal uppercase shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-9 h-9">

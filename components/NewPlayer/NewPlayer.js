@@ -1,11 +1,10 @@
-import React, {MouseEventHandler} from 'react';
-import './NewPlayer.css';
+import React from 'react';
 
 
 
-function NewPlayer(props: any) {
+function NewPlayer(props) {
 
-    const handleSubmit = (event: any) => {
+    const handleSubmit = (event) => {
         event.preventDefault()
         const name = event.target[0].value
         const phoneNumber = event.target[1].value
