@@ -14,10 +14,9 @@ export default function Home(props) {
   const [players, setPlayers] = useState(props.players)
 
 
-  useEffect(() => {
-    return async () => {
-      const { players } = await hygraphClient.request(
-          gql`
+  const fetchPlayers = async () => {
+    const { players } = await hygraphClient.request(
+        gql`
                 query MyQuery {
                   players {
                     id
@@ -28,10 +27,15 @@ export default function Home(props) {
                   }
                 }
             `,
-      )
-      setPlayers(players);
+    )
+    setPlayers(players);
+  }
+
+  useEffect(() => {
+    return async () => {
+      await fetchPlayers()
     };
-  }, [players]);
+  }, []);
 
 
   const addNewPlayer = async (name, phoneNumber) => {
@@ -60,7 +64,7 @@ export default function Home(props) {
           )
         });
 
-        setPlayers([])
+        await fetchPlayers()
 
       }
       else {
@@ -88,8 +92,8 @@ export default function Home(props) {
               deletePlayer(where: {id: "${player.id}"}) {id}
             }
             `
-    ).then(res => {
-      setPlayers([])
+    ).then(async (res) => {
+      await fetchPlayers()
     })
 
   }
@@ -143,7 +147,7 @@ export default function Home(props) {
 }
 
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const { players } = await hygraphClient.request(
       gql`
         query MyQuery {
@@ -157,10 +161,13 @@ export async function getServerSideProps() {
         }
     `,
   );
-
   return {
     props: {
       players,
     },
-  };
+    // Next.js will attempt to re-generate the page:
+    // - When a request comes in
+    // - At most once every 10 seconds
+    revalidate: 60, // In seconds
+  }
 }

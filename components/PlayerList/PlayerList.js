@@ -81,7 +81,7 @@ function PlayerList({players, removePlayers}) {
                                 <tbody>
 
                                 {
-                                    players.map((player, i) => {
+                                    players && players.map((player, i) => {
 
                                         return (
                                             <tr key={player.fullName} className={player.playerType === 0 ? `bg-blue-100` : (player.playerType === 1 ? "bg-white" : "bg-red-100")}>
