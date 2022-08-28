@@ -11,6 +11,9 @@ function NewPlayer(props) {
         props.addNewPlayer(name, phoneNumber)
     }
 
+    const handleListRefresh = (event) => {
+        props.handleListRefresh()
+    }
     return (
         <div className="newPlayer">
             <div className="subscribe-box bg-gray-50">
@@ -26,7 +29,7 @@ function NewPlayer(props) {
                         <div className={'mx-auto space-x-4 p-5 flex flex-row'}>
                             <div className="">
                                 <label htmlFor="exampleFormControlInput1" className="form-label inline-block mb-2 text-gray-700">Imie i Nazwisko</label>
-                                <input id="exampleFormControlInput1" className={'placeholder-black text-black p-4 ml-4'} type="text" placeholder="Wpisz Imie i Nazwisko" autoComplete="off" required/>
+                                <input onMouseDown={handleListRefresh} id="exampleFormControlInput1" className={'placeholder-black text-black p-4 ml-4'} type="text" placeholder="Wpisz Imie i Nazwisko" autoComplete="off" required/>
                             </div>
                         </div>
                         <div className={'mx-auto space-x-4 p-5 flex flex-row'}>

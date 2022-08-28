@@ -8,6 +8,7 @@ import favUrl from '../public/fav.svg';
 import hygraphClient from "../lib/hygraphClient";
 import {gql} from "graphql-request";
 import Head from "next/head";
+import Swal from "sweetalert2";
 
 
 export default function Home(props) {
@@ -85,6 +86,18 @@ export default function Home(props) {
     }
   }
 
+  const handleListRefresh = () => {
+
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      timer: 3000,
+      timerProgressBar: true
+    })
+    Toast.fire('Lista została odświeżona\'', '', 'info')
+    fetchPlayers()
+  }
+
   const removePlayer = async (player) => {
     await hygraphClient.request(
         gql`
@@ -105,13 +118,20 @@ export default function Home(props) {
           <link rel="icon" type="image/svg+xml" href="/fav.svg" />
           <title>KotowscyDent - Piłka Nożna (Orlik) </title>
         </Head>
+
         <div className="container mx-auto w-full md:w-1/2">
           <Header/>
           <Image className={'w-full h-full'} src={heroUrl} alt='Hero Image'/>
+          {/*<div className="flex flex-col">*/}
+          {/*  <button type="button"*/}
+          {/*          onClick={() => {fetchPlayers()}}*/}
+          {/*          className="inline-block px-6 py-2.5 bg-gray-200 text-gray-700 font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out float-right">ODŚWIEŻ LISTE*/}
+          {/*  </button>*/}
+          {/*</div>*/}
           <PlayerList players={players} removePlayers={removePlayer}/>
 
           <div className="mt-4">
-            <NewPlayer addNewPlayer={addNewPlayer}/>
+            <NewPlayer addNewPlayer={addNewPlayer} handleListRefresh={handleListRefresh}/>
           </div>
 
         </div>
