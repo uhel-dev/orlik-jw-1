@@ -10,28 +10,9 @@ import {gql} from "graphql-request";
 import Head from "next/head";
 
 
-export default function Home() {
+export default function Home(props) {
+  const [players, setPlayers] = useState(props.players)
 
-  const [players, setPlayers] = useState([])
-
-  useEffect(() => {
-    return async () => {
-      const { players } = await hygraphClient.request(
-          gql`
-                query MyQuery {
-                  players {
-                    id
-                    fullName
-                    mobile
-                    playerType
-                    createdAt
-                  }
-                }
-            `,
-      )
-      setPlayers(players);
-    };
-  }, []);
 
   useEffect(() => {
     return async () => {
@@ -162,24 +143,24 @@ export default function Home() {
 }
 
 
-// export async function getServerSideProps() {
-//   const { players } = await hygraphClient.request(
-//       gql`
-//         query MyQuery {
-//           players {
-//             id
-//             fullName
-//             mobile
-//             playerType
-//             createdAt
-//           }
-//         }
-//     `,
-//   );
-//
-//   return {
-//     props: {
-//       players,
-//     },
-//   };
-// }
+export async function getServerSideProps() {
+  const { players } = await hygraphClient.request(
+      gql`
+        query MyQuery {
+          players {
+            id
+            fullName
+            mobile
+            playerType
+            createdAt
+          }
+        }
+    `,
+  );
+
+  return {
+    props: {
+      players,
+    },
+  };
+}
