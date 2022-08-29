@@ -3,12 +3,13 @@ import {useEffect, useState} from "react";
 import Header from "../components/Header/Header";
 import PlayerList from "../components/PlayerList/PlayerList";
 import NewPlayer from "../components/NewPlayer/NewPlayer";
-import heroUrl from '../public/assets/hero1.png';
+import heroUrl from '../public/assets/hero2.png';
 import favUrl from '../public/fav.svg';
 import hygraphClient from "../lib/hygraphClient";
 import {gql} from "graphql-request";
 import Head from "next/head";
 import Swal from "sweetalert2";
+import Timer from "../components/Timer/Timer";
 
 
 export default function Home(props) {
@@ -76,7 +77,6 @@ export default function Home(props) {
         })
       }
     }
-
     if (players.length >= 12) {
       swal({
         title: "Pelny Sklad",
@@ -122,11 +122,9 @@ export default function Home(props) {
         <div className="container mx-auto w-full md:w-1/2">
           <Header/>
           <Image className={'w-full h-full'} src={heroUrl} alt='Hero Image'/>
-          {/*<div className="flex flex-col">*/}
-          {/*  <button type="button"*/}
-          {/*          onClick={() => {fetchPlayers()}}*/}
-          {/*          className="inline-block px-6 py-2.5 bg-gray-200 text-gray-700 font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-gray-300 hover:shadow-lg focus:bg-gray-300 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-gray-400 active:shadow-lg transition duration-150 ease-in-out float-right">ODŚWIEŻ LISTE*/}
-          {/*  </button>*/}
+          {/*<Timer/>*/}
+          {/*<div>*/}
+          {/*  <h1 className="mx-auto text-center p-8 text-2xl md:text-4xl font-orbitron">20:00, Czwartek, <br/> Boisko Orlik SP 4</h1>*/}
           {/*</div>*/}
           <PlayerList players={players} removePlayers={removePlayer}/>
 

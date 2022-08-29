@@ -31,7 +31,7 @@ function PlayerList({players, removePlayers}) {
     const handleRemove = async (data) => {
         swal({
             title: 'Wpisz Haslo',
-            text: 'Tylko administrator moze usunac gracza z listy, wpisz haslo aby potwierdzic ze to ty.',
+            text: 'Nie chcesz grac? Wpisz "exit" i zrob miejsce dla innych',
             // @ts-ignore
             content: "input",
             button: {
@@ -41,7 +41,7 @@ function PlayerList({players, removePlayers}) {
         })
             .then(pwd => {
                 if (!pwd) throw null;
-                if (pwd === 'kd!') {
+                if (pwd === 'exit' || pwd === 'Exit' || pwd === 'EXIT') {
                     swal("Zawodnik Zostal Usuniety!", "Podales poprawne haslo!", "success");
                     removePlayers(data)
                 }
