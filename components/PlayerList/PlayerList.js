@@ -18,13 +18,17 @@ export class Player {
 
 function PlayerList({players, removePlayers}) {
 
-    const getFormattedMobileNumber = (n) => {
-        if(n) {
-            const number = n.toString()
-            if (number) {
-                return (number.includes('+48') ? '' : '+48 ') + number.match(/.{1,3}/g).join(' ')
-            }
-        }
+    const formatNumber = (number, masked = true) => {
+
+        let n = number.toString().replaceAll('+48', /''/)
+            .replaceAll(' ', '')
+            .split( /(?<=^(?:.{3})+)(?!$)/ )
+            .join(' ')
+        return '+48 ' + n
+    }
+
+    const maskNumber = (n) => {
+        return n.substring(0, 4) + '*** *** ***'
     }
 
     // @ts-ignore
@@ -90,7 +94,7 @@ function PlayerList({players, removePlayers}) {
                                                     {player.fullName}
                                                 </td>
                                                 <td className="text-xs md:text-lg px-3 md:px-6 text-gray-900 font-light py-4 whitespace-nowrap">
-                                                    <a href={`tel:+48${player.mobile}`} className="no-underline text-gray-900">{getFormattedMobileNumber(player.mobile)}</a>
+                                                    <a href={`tel:+48${player.mobile}`} className="no-underline text-gray-900">{player.playerType === 0 ? formatNumber(player.mobile) : maskNumber(formatNumber(player.mobile))}</a>
                                                 </td>
                                                 <td className="text-xs md:text-lg px-3 md:px-6 text-gray-900 font-light py-4 whitespace-nowrap">
                                                     {player.playerType === 0 ? "Kapitan" : (player.playerType === 1 ? "Zawodnik" : "Rezerwowy") }
