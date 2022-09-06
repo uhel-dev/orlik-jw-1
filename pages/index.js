@@ -117,6 +117,12 @@ export default function Home(props) {
         <Head>
           <link rel="icon" type="image/svg+xml" href="/fav.svg" />
           <title>KotowscyDent - Piłka Nożna (Orlik) </title>
+          <meta property="og:title" content="KotowscyDent - Piłka Nożna (Orlik)">
+          <meta property="og:site_name" content="KotowscyDent - Piłka Nożna (Orlik)">
+          <meta property="og:url" content="orlik-jw.pl"/>
+          <meta property="og:description" content="Zapisz sie i zagraj z nami na Orliku">
+          <meta property="og:type" content="website">
+          <meta property="og:image" content="https://orlik-jw.pl/_ipx/w_3840,q_75/%2F_next%2Fstatic%2Fmedia%2Fhero2.49fd1c4f.png?url=%2F_next%2Fstatic%2Fmedia%2Fhero2.49fd1c4f.png&w=3840&q=75">
         </Head>
 
         <div className="container mx-auto w-full md:w-1/2">
