@@ -48,7 +48,7 @@ export default function Home(props) {
         await hygraphClient.request(
             gql`
               mutation MyMutation {
-                createPlayer(data: {fullName: "${name}", mobile: ${phoneNumber}, playerType: ${(currentPlayers.length < 10 ? 1: 2)}}) {
+                createPlayer(data: {fullName: "${name}", mobile: ${phoneNumber}, playerType: ${(currentPlayers.length < 12 ? 1: 2)}}) {
                   id
                 }
               }
