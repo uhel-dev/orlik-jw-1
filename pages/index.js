@@ -4,12 +4,10 @@ import Header from "../components/Header/Header";
 import PlayerList from "../components/PlayerList/PlayerList";
 import NewPlayer from "../components/NewPlayer/NewPlayer";
 import heroUrl from '../public/assets/hero3.png';
-import favUrl from '../public/fav.svg';
 import hygraphClient from "../lib/hygraphClient";
 import {gql} from "graphql-request";
 import Head from "next/head";
 import Swal from "sweetalert2";
-import Timer from "../components/Timer/Timer";
 import Toast from "sweetalert2";
 
 
@@ -196,7 +194,7 @@ export async function getStaticProps() {
   const { players } = await hygraphClient.request(
       gql`
         query MyQuery {
-          players {
+          players(first:15) {
             id
             fullName
             mobile
