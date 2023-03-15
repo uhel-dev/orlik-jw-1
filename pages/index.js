@@ -10,6 +10,7 @@ import {gql} from "graphql-request";
 import Head from "next/head";
 import Swal from "sweetalert2";
 import Timer from "../components/Timer/Timer";
+import Toast from "sweetalert2";
 
 
 export default function Home(props) {
@@ -20,7 +21,7 @@ export default function Home(props) {
     const { players } = await hygraphClient.request(
         gql`
                 query MyQuery {
-                  players {
+                  players(first: 15) {
                     id
                     fullName
                     mobile
@@ -40,34 +41,38 @@ export default function Home(props) {
   }, []);
 
 
-  const addNewPlayer = async (name, phoneNumber) => {
-    if (players.length < 12) {
-      if (players.filter(p => p.fullName === name).length !== 1) {
-        const currentPlayers = [...players]
-
-        await hygraphClient.request(
-            gql`
+  const up = async (name, phoneNumber, playerType) => {
+    await hygraphClient.request(
+        gql`
               mutation MyMutation {
-                createPlayer(data: {fullName: "${name}", mobile: ${phoneNumber}, playerType: ${(currentPlayers.length < 12 ? 1: 2)}}) {
+                createPlayer(data: {fullName: "${name}", mobile: ${phoneNumber}, playerType: ${playerType}}) {
                   id
                 }
               }
             `
-        ).then(async res => {
+    ).then(async res => {
 
-          await hygraphClient.request(
-              gql`
+      await hygraphClient.request(
+          gql`
                  mutation MyMutation {
                   publishPlayer(where: {id: "${res.createPlayer.id}"}) {
                     id
                   }
                 }
             `
-          )
-        });
+      )
+    });
 
-        await fetchPlayers()
+    await fetchPlayers()
+  }
 
+
+
+  const addNewPlayer = async (name, phoneNumber) => {
+    if (players.length < 12) {
+      if (players.filter(p => p.fullName === name).length !== 1) {
+        up(name, phoneNumber, 1)
+        Toast.fire('Do zobaczenia na boisku!', '', 'info')
       }
       else {
         swal({
@@ -75,9 +80,25 @@ export default function Home(props) {
           text: "Zawodnik o takim samym Imieniu i Nazwisku istnieje juz na liscie.",
           icon: "error"
         })
+        return
       }
     }
-    if (players.length >= 12) {
+    if (players.length >= 12 && players.length < 14) {
+      if (players.filter(p => p.fullName === name).length !== 1) {
+        up(name, phoneNumber, 2)
+        Toast.fire('Do zobaczenia na boisku!', '', 'info')
+      }
+      else {
+        swal({
+          title: "Zawodnik jest juz na liscie",
+          text: "Zawodnik o takim samym Imieniu i Nazwisku istnieje juz na liscie.",
+          icon: "error"
+        })
+        return
+      }
+    }
+
+    if (players.length > 13) {
       swal({
         title: "Pelny Sklad",
         text: "Przepraszamy, w tym tygodniu mamy juz pelny sklad. Sproboj za tydzien!",
