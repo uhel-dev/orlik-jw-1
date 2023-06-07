@@ -19,9 +19,13 @@ function NewPlayer(props) {
             <div className="subscribe-box bg-gray-50">
                 <div className="flex space-x-2 justify-center">
                     <h2 className="text-lg md:text-4xl font-medium leading-tight text-[#15376b] p-4">
-                        Zapisz sie i zagraj z nami na
+                        {/*Zapisz sie i zagraj z nami na*/}
+                        {/*<span*/}
+                        {/*    className="ml-2 inline-block py-1.5 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-[#32d7d3] text-white rounded">Orliku</span>*/}
+
+                        W ten Czwartek
                         <span
-                            className="ml-2 inline-block py-1.5 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-[#32d7d3] text-white rounded">Orliku</span>
+                            className="ml-2 inline-block py-1.5 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-[#32d7d3] text-white rounded">(Boże Ciało)</span> nie gramy
                     </h2>
                 </div>
 
