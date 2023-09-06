@@ -27,8 +27,7 @@ function NewPlayer(props) {
 
                 <div className="flex space-x-2 justify-center py-2">
                     <h4 className="text-lg w-2/3 text-center md:text-2xl font-medium leading-tight text-[#15376b] p-4">
-                        24.06 sobota mecz na ul. Piekarskiej(stadion) po 11 osób duże boisko kto chętny zgłaszamy
-                        <span className="ml-2 inline-block py-1.5 px-2.5 leading-none text-center whitespace-nowrap align-baseline font-bold bg-[#32d7d3] text-white rounded">kapitanowi</span>
+                        Orlik w remoncie, zapisy wrócą do normy po remoncie.
                     </h4>
                 </div>
 
