@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import Header from "../components/Header/Header";
 import PlayerList from "../components/PlayerList/PlayerList";
 import NewPlayer from "../components/NewPlayer/NewPlayer";
-import heroUrl from '../public/assets/hero3.png';
+import heroUrl from '../public/assets/orlik-2024.png';
 import hygraphClient from "../lib/hygraphClient";
 import {gql} from "graphql-request";
 import Head from "next/head";
