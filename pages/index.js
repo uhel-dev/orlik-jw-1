@@ -177,9 +177,9 @@ export default function Home(props) {
                 <h5 className="font-medium mb-2 uppercase">Polityka prywatności</h5>
 
                 <p className="mb-4">
-                  Informujemy, że strona orlik-jw.pl nie wykorzystuje plikow cookie.<br/>
-                  Zapisujac sie na naszej lisicie wyrażasz zgodę na używanie twojego numeru w celach kontaktowych, <br/>
-                  ale tylko w wypadku nieobecnosci na boisku.
+                  Informujemy, że strona orlik-jw.pl nie wykorzystuje plików cookie.<br/>
+                  Zapisując się na naszą listę, wyrażasz zgodę na używanie Twojego numeru telefonu w celach<br/>
+                  kontaktowych, ale tylko w przypadku nieobecności na boisku.
                 </p>
               </div>
             </div>
