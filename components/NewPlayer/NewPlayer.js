@@ -25,9 +25,14 @@ function NewPlayer(props) {
                     </h2>
                 </div>
 
+                {/*<div className="flex space-x-2 justify-center py-2">*/}
+                {/*    <h4 className="text-lg w-2/3 text-center md:text-2xl font-medium leading-tight text-[#15376b] p-4">*/}
+                {/*        Orlik w remoncie, zapisy wrócą do normy po remoncie.*/}
+                {/*    </h4>*/}
+                {/*</div>*/}
                 <div className="flex space-x-2 justify-center py-2">
                     <h4 className="text-lg w-2/3 text-center md:text-2xl font-medium leading-tight text-[#15376b] p-4">
-                        Orlik w remoncie, zapisy wrócą do normy po remoncie.
+                        Miejsce: Boisko Trawiaste Piast Tuczempy
                     </h4>
                 </div>
 
