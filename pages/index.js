@@ -11,10 +11,21 @@ import {gql} from "graphql-request";
 import Head from "next/head";
 import Swal from "sweetalert2";
 import Toast from "sweetalert2";
+import {mutate} from "swr";
+import {usePlayers} from "../hooks/usePlayers";
 
 
-export default function Home(props) {
-  const [players, setPlayers] = useState(props.players)
+export default function Home() {
+  const [players, setPlayers] = useState([])
+  const { data, error, isLoading } = usePlayers();
+
+  useEffect(() => {
+    setPlayers(data)
+  }, [isLoading])
+
+  useEffect(() => {
+    mutate('/api/fetch-players')
+  }, [players]);
 
 
   const fetchPlayers = async () => {
@@ -34,17 +45,17 @@ export default function Home(props) {
     setPlayers(players);
   }
 
-  useEffect(() => {
-    return async () => {
-      await fetchPlayers()
-    };
-  }, []);
-
-  useEffect(() => {
-    return async () => {
-      await fetchPlayers()
-    };
-  }, [players]);
+  // useEffect(() => {
+  //   return async () => {
+  //     await fetchPlayers()
+  //   };
+  // }, []);
+  //
+  // useEffect(() => {
+  //   return async () => {
+  //     await fetchPlayers()
+  //   };
+  // }, [players]);
 
   const up = async (name, phoneNumber, playerType) => {
     await hygraphClient.request(
@@ -198,27 +209,27 @@ export default function Home(props) {
 }
 
 
-export async function getStaticProps() {
-  const { players } = await hygraphClient.request(
-      gql`
-        query MyQuery {
-          players(first:15) {
-            id
-            fullName
-            mobile
-            playerType
-            createdAt
-          }
-        }
-    `,
-  );
-  return {
-    props: {
-      players,
-    },
-    // Next.js will attempt to re-generate the page:
-    // - When a request comes in
-    // - At most once every 10 seconds
-    revalidate: 60, // In seconds
-  }
-}
+// export async function getStaticProps() {
+//   const { players } = await hygraphClient.request(
+//       gql`
+//         query MyQuery {
+//           players(first:15) {
+//             id
+//             fullName
+//             mobile
+//             playerType
+//             createdAt
+//           }
+//         }
+//     `,
+//   );
+//   return {
+//     props: {
+//       players,
+//     },
+//     // Next.js will attempt to re-generate the page:
+//     // - When a request comes in
+//     // - At most once every 10 seconds
+//     revalidate: 60, // In seconds
+//   }
+// }
