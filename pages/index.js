@@ -40,6 +40,11 @@ export default function Home(props) {
     };
   }, []);
 
+  useEffect(() => {
+    return async () => {
+      await fetchPlayers()
+    };
+  }, [players]);
 
   const up = async (name, phoneNumber, playerType) => {
     await hygraphClient.request(
