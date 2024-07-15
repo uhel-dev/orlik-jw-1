@@ -27,6 +27,7 @@ function PlayerList({players, removePlayers}) {
         }
     }
 
+
     // @ts-ignore
     const handleRemove = async (data) => {
         swal({
