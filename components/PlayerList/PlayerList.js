@@ -19,11 +19,20 @@ export class Player {
 function PlayerList({players, removePlayers}) {
 
     const getFormattedMobileNumber = (n) => {
-        if(n) {
-            const number = n.toString()
-            if (number) {
-                return (number.includes('+48') ? '' : '+48 ') + number.match(/.{1,3}/g).join(' ')
-            }
+        let number = n
+        if(n.startsWith("+48 ")) {
+            number = n.slice(4)
+        }
+        else if(n.startsWith("+48")) {
+            number = n.slice(3)
+        }
+
+        number = number.replaceAll(" ", "");
+        if(number.length > 9) {
+            return number;
+        }
+        else {
+            return "+48 " + number.match(/.{1,3}/g).join(' ');
         }
     }
 

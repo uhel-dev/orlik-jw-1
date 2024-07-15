@@ -47,7 +47,7 @@ function NewPlayer(props) {
                         <div className={'mx-auto space-x-4 p-5 flex flex-row'}>
                             <div className="">
                                 <label htmlFor="exampleFormControlInput2" className="form-label inline-block mb-2 text-gray-700">Numer Telefonu</label>
-                                <input id="exampleFormControlInput2" className={'placeholder-black text-black p-4 ml-4'} type="number" placeholder="Wpisz Numer Telefonu" autoComplete="off" required/>
+                                <input id="exampleFormControlInput2" className={'placeholder-black text-black p-4 ml-4'} type="text" placeholder="Wpisz Numer Telefonu" autoComplete="off" required/>
                             </div>
                         </div>
                     <button className={'m-8 bg-[#32d7d3] w-1/3 md:w-1/6 p-2 mx-auto text-white font-bold'} type="submit"><span>Zapisz Sie</span></button>

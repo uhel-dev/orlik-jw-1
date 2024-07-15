@@ -45,23 +45,12 @@ export default function Home() {
     setPlayers(players);
   }
 
-  // useEffect(() => {
-  //   return async () => {
-  //     await fetchPlayers()
-  //   };
-  // }, []);
-  //
-  // useEffect(() => {
-  //   return async () => {
-  //     await fetchPlayers()
-  //   };
-  // }, [players]);
 
   const up = async (name, phoneNumber, playerType) => {
     await hygraphClient.request(
         gql`
               mutation MyMutation {
-                createPlayer(data: {fullName: "${name}", mobile: ${phoneNumber}, playerType: ${playerType}}) {
+                createPlayer(data: {fullName: "${name}", mobile: "${phoneNumber}", playerType: ${playerType}}) {
                   id
                 }
               }
@@ -76,10 +65,12 @@ export default function Home() {
                   }
                 }
             `
-      )
+      ).then(async res1 => {
+        await fetchPlayers()
+      }).catch(err => {
+        console.log(err)
+      })
     });
-
-    await fetchPlayers()
   }
 
 
